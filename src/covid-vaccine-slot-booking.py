@@ -13,11 +13,10 @@ def main():
     args = parser.parse_args()
 
     filename = 'vaccine-booking-details.json'
-    mobile = 9999999999 #Enter mobile number here
-
     print('Running Script')
     beep(500, 150)
-
+    mobile = input("Enter the registered mobile number: ")
+            
     try:
         base_request_header = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
@@ -35,7 +34,7 @@ def main():
             print("\n=================================== Note ===================================\n")
             print(f"Info from perhaps a previous run already exists in {filename} in this directory.")
             print(f"IMPORTANT: If this is your first time running this version of the application, DO NOT USE THE FILE!")
-            try_file = 'y'
+            try_file = input("Would you like to see the details and confirm to proceed? (y/n Default y): ")
             try_file = try_file if try_file else 'y'
 
             if try_file == 'y':
@@ -43,7 +42,7 @@ def main():
                 print("\n================================= Info =================================\n")
                 display_info_dict(collected_details)
 
-                file_acceptable = 'y'
+                file_acceptable = input("\nProceed with above info? (y/n Default n): ")
                 file_acceptable = file_acceptable if file_acceptable else 'n'
 
                 if file_acceptable != 'y':
@@ -86,7 +85,7 @@ def main():
                 print('Token is INVALID.')
                 token_valid = False
 
-                tryOTP = 'y'
+                tryOTP = input('Try for a new Token? (y/n Default y): ')
                 if tryOTP.lower() == 'y' or not tryOTP:
                     token = generate_token_OTP(mobile, base_request_header)
                     token_valid = True
@@ -102,4 +101,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
